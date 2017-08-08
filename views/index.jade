@@ -1,0 +1,36 @@
+doctype html
+html
+    head
+    meta(charset="UTF-8")
+    title 我的留言板
+    link(href="/css/bootstrap.css" rel='stylesheet')
+    script(src="/js/jquery-1.11.0.js")
+    script(src="/js/bootstrap.js")
+body
+    .container
+        h1 我的留言板
+        form.form-horizontal(action="/",method='post')
+           .form-group
+             label(for="name") 姓名:
+             input(type="text",id="name",class="form-control",placeholder="姓名",name='name')
+           .form-group.form-group-sm
+               label(for="msg") 留言内容：
+               textarea(class="form-control",id="msg",rows="3",name='msg')
+           button(type="submit",class="btn btn-primary") 提交
+        nav(aria-label="Page navigation")
+           ul.pagination
+             - for(var i=0;i<pages;i++)
+                  li
+                    a(href="?page="+i+"")= i+1
+        .msg
+            .row
+                 each result in results
+                     .col-lg-12.list-group
+                        p.list-group-item 【姓名】:
+                           span= result.name
+                        p.list-group-item 【留言】:
+                            span= result.msg
+                        p.list-group-item 【时间】:
+                            span= (result.time).toLocaleString()
+                        p.list-group-item
+                           a(href="/delete?id="+result['_id']+"") 删除

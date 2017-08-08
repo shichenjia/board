@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="getjson">clickme</button>
+</div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods:{
+                getjson(){
+                    this.$http.get('/read',{params: {query: 0},emulateJSON:true}).then(res=>{
+                          console.log(res.body)
+                    },error=>{
+                        console.log(error)
+                    })
+                }
+            },
+
+        })
+
+    </script>
+</body>
+</html>
